@@ -5,20 +5,28 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody2D rigidBody;
+
     private void Start()
     {
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            this.transform.Translate(-0.1f, 0.0f, 0.0f);
-        }
+        float x = Input.GetAxis("Horizontal");
+        Debug.Log("x :");
+        Debug.Log(x);
+        Debug.Log("transform :");
+        Debug.Log(transform.right);
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (x > 0)
         {
-            this.transform.Translate(0.1f, 0.0f, 0.0f);
+            rigidBody.AddForce(transform.right * 8.0f);
+        }
+        else if (x < 0)
+        {
+            rigidBody.AddForce(-transform.right * 8.0f);
         }
     }
 
